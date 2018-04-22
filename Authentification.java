@@ -30,7 +30,7 @@ import javax.swing.table.TableRowSorter;
  *
  * @author KINGBOURY
  */
-
+	
  
     public class Authentification extends JFrame {
         
@@ -76,7 +76,7 @@ import javax.swing.table.TableRowSorter;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
         setPreferredSize(new java.awt.Dimension(550, 335));
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
         setTitle("Authentification");
     
@@ -89,13 +89,13 @@ import javax.swing.table.TableRowSorter;
         jLabel2.setForeground(new java.awt.Color(255, 0, 0));
         jLabel2.setText("LOGIN");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(190, 140, 41, 16);
+        jLabel2.setBounds(190, 140, 50, 16);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 0, 0));
         jLabel3.setText("MOT DE PASSE");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(140, 200, 100, 16);
+        jLabel3.setBounds(130, 200, 150, 16);
         jPanel1.add(jTextField1);
         jTextField1.setBounds(250, 140, 130, 22);
         jPanel1.add(jPasswordField1);
@@ -105,7 +105,7 @@ import javax.swing.table.TableRowSorter;
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         jButton1.setText("Valider");
         jPanel1.add(jButton1);
-        jButton1.setBounds(140, 260, 80, 25);
+        jButton1.setBounds(140, 260, 90, 25);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -150,6 +150,34 @@ import javax.swing.table.TableRowSorter;
 
     
     }
+ 
+ 	static class  Connexion{
+ 		public static Connection connecter() {
+ 			Connection c1 = null;
+ 			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				String url= "jdbc:mysql://localhost:3306/bibliotheque";
+	            
+	            String user="root"; 
+	            
+	            String pass="test";
+	            
+	            try {
+					 c1 =DriverManager.getConnection(url, user, pass);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            
+	            System.out.println("Connection bien etablie");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return c1;
+			
+		}
+ 	}
     
      class Acces implements ActionListener {
            
@@ -161,17 +189,7 @@ import javax.swing.table.TableRowSorter;
                 
                 String h2="";
                     try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+            Connection c1 = Connexion.connecter();
             
             Statement a = c1.createStatement();
             
@@ -196,7 +214,7 @@ import javax.swing.table.TableRowSorter;
                         BiblioCare care = new BiblioCare();
                     
                         JOptionPane jop1 = new JOptionPane();
-                        jop1.showMessageDialog(null, "Bienvenue", "Acces",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Bienvenue", "Acces",JOptionPane.INFORMATION_MESSAGE);
                         jop1.setVisible(true);  
                     
                     
@@ -205,7 +223,7 @@ import javax.swing.table.TableRowSorter;
                     else{
                     
                         JOptionPane jop1 = new JOptionPane();
-                        jop1.showMessageDialog(null, "Informations incorrectes", "Erreur",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Informations incorrectes", "Erreur",JOptionPane.ERROR_MESSAGE);
                         jop1.setVisible(true);  
                     
                     
@@ -230,7 +248,11 @@ import javax.swing.table.TableRowSorter;
  public class BiblioCare extends JFrame {
     
     
-    private javax.swing.JLabel jLabel1;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -311,7 +333,7 @@ import javax.swing.table.TableRowSorter;
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(null);
         setPreferredSize(new java.awt.Dimension(550, 355));
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
         setTitle("BiblioCare");
     
@@ -502,7 +524,7 @@ import javax.swing.table.TableRowSorter;
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
         setPreferredSize(new java.awt.Dimension(225, 375));
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
         setTitle("BiblioCare");
 
@@ -618,7 +640,7 @@ import javax.swing.table.TableRowSorter;
         getContentPane().setLayout(null);
         
         setPreferredSize(new java.awt.Dimension(344, 300));
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
         setTitle("BiblioCare");
 
@@ -983,7 +1005,7 @@ import javax.swing.table.TableRowSorter;
             public void actionPerformed(ActionEvent e){
                 
                 JOptionPane ti = new JOptionPane();
-                 String hosp = ti.showInputDialog(null, "Veuillez Entrer l'identifiant du pret!", "Information !",JOptionPane.QUESTION_MESSAGE);
+                 String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'identifiant du pret!", "Information !",JOptionPane.QUESTION_MESSAGE);
                
             if(hosp.isEmpty()==true){
                 
@@ -995,18 +1017,8 @@ import javax.swing.table.TableRowSorter;
             }
             else{
                 int ph=0;
-                                               try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+            try{
+            Connection c1 = Connexion.connecter();
             
             int gh=0;
             
@@ -1022,18 +1034,7 @@ import javax.swing.table.TableRowSorter;
             }catch(Exception loi){}
             
                     try{
-                Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
-            
+                    	Connection c1 = Connexion.connecter();
             int gh=0;
             
             Statement a = c1.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -1050,18 +1051,7 @@ import javax.swing.table.TableRowSorter;
             catch(Exception ko){}
                     
                                           try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
-            
+                                        	  Connection c1 = Connexion.connecter();
             int gh=0;
             
             Statement a = c1.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -1080,7 +1070,7 @@ import javax.swing.table.TableRowSorter;
             
             
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Suppression effectuee", "Suppression",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Suppression effectuee", "Suppression",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);  
             
             
@@ -1093,7 +1083,7 @@ import javax.swing.table.TableRowSorter;
             public void actionPerformed(ActionEvent e){
                 
                 JOptionPane ti = new JOptionPane();
-                 String hosp = ti.showInputDialog(null, "Veuillez Entrer l'identifiant du livre!", "Information !",JOptionPane.QUESTION_MESSAGE);
+                 String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'identifiant du livre!", "Information !",JOptionPane.QUESTION_MESSAGE);
                
             if(hosp.isEmpty()==true){
                 
@@ -1106,17 +1096,7 @@ import javax.swing.table.TableRowSorter;
             else{
             
                     try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                    	Connection c1 = Connexion.connecter();
             
             Statement a = c1.createStatement();
             
@@ -1127,7 +1107,7 @@ import javax.swing.table.TableRowSorter;
             
             
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Suppression effectuee", "Suppression",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Suppression effectuee", "Suppression",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);  
             
             
@@ -1141,7 +1121,7 @@ import javax.swing.table.TableRowSorter;
             public void actionPerformed(ActionEvent e){
                 
                 JOptionPane ti = new JOptionPane();
-                 String hosp = ti.showInputDialog(null, "Veuillez Entrer l'identifiant de l'adherent!", "Information !",JOptionPane.QUESTION_MESSAGE);
+                 String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'identifiant de l'adherent!", "Information !",JOptionPane.QUESTION_MESSAGE);
                
             if(hosp.isEmpty()==true){
                 
@@ -1154,17 +1134,7 @@ import javax.swing.table.TableRowSorter;
             else{
             
                     try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                    	Connection c1 = Connexion.connecter();
             
             Statement a = c1.createStatement();
             
@@ -1175,7 +1145,7 @@ import javax.swing.table.TableRowSorter;
             
             
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Suppression effectuee", "Suppression",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Suppression effectuee", "Suppression",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);  
             
             
@@ -1226,30 +1196,14 @@ import javax.swing.table.TableRowSorter;
                 
                 JOptionPane pg = new JOptionPane();
                 
-                int option =pg.showConfirmDialog(null, "Voulez vous vraiment vous deconnectez?","Deconnection",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+                int option =JOptionPane.showConfirmDialog(null, "Voulez vous vraiment vous deconnectez?","Deconnection",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
                
                 if(option == JOptionPane.OK_OPTION){
-                try {
             
                 setVisible(false);
                 
                 Authentification o = new Authentification();
                 
-                ch.setVisible(false);
-                inf.setVisible(false);
-                ad.setVisible(false);
-                ad1.setVisible(false);
-                inf1.setVisible(false);
-                ad2.setVisible(false);
-                inf2.setVisible(false);
-                inf3.setVisible(false);
-                ref.setVisible(false);
-                ih.setVisible(false);
-                
-                
-                }catch (Exception ek) {
-
-				}
                 }
                 else{
                 
@@ -1341,7 +1295,7 @@ import javax.swing.table.TableRowSorter;
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(null);
          setPreferredSize(new java.awt.Dimension(558, 430));
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
         setTitle("BiblioCare");
     
@@ -1428,17 +1382,7 @@ import javax.swing.table.TableRowSorter;
         String pos="";
         
                             try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                            	Connection c1 = Connexion.connecter();
             
             int gh=0;
             
@@ -1457,7 +1401,7 @@ import javax.swing.table.TableRowSorter;
       }catch(Exception er){
           
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
                                      
         
       }
@@ -1518,23 +1462,12 @@ import javax.swing.table.TableRowSorter;
                 
                   
                 JOptionPane ti = new JOptionPane();
-                 String hosp = ti.showInputDialog(null, "Veuillez Entrer l'ancien mot de passw!", "Information !",JOptionPane.QUESTION_MESSAGE);
+                 String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'ancien mot de passw!", "Information !",JOptionPane.QUESTION_MESSAGE);
             
                  String passe="";
                                    try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
+                                	   Connection c1 = Connexion.connecter();
             
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
-            
-            int gh=0;
             
             Statement a = c1.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             
@@ -1550,20 +1483,10 @@ import javax.swing.table.TableRowSorter;
       
       }
                   if(!hosp.equals(passe)){JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Mot de passe incorrecte", "ERROR",JOptionPane.ERROR_MESSAGE);}
+                       JOptionPane.showMessageDialog(null,"Mot de passe incorrecte", "ERROR",JOptionPane.ERROR_MESSAGE);}
                   else{
                           try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                        	  Connection c1 = Connexion.connecter();
             
             int gh=0;
             
@@ -1586,7 +1509,7 @@ import javax.swing.table.TableRowSorter;
         
       }
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"modifications appliquees", "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"modifications appliquees", "Information",JOptionPane.INFORMATION_MESSAGE);
                                      
                         jLabel5.setText(jTextField1.getText());
             }
@@ -1630,7 +1553,7 @@ import javax.swing.table.TableRowSorter;
        
         this.setLocationRelativeTo(null);
        
-        this.setResizable(false);
+        this.setResizable(true);
        
         this.setVisible(true);
         
@@ -1756,17 +1679,7 @@ import javax.swing.table.TableRowSorter;
       CreateColonne();
        
                   try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                	  Connection c1 = Connexion.connecter();
             
             Statement a = c1.createStatement();
             
@@ -1834,7 +1747,7 @@ import javax.swing.table.TableRowSorter;
         }
                       int pou = table.getRowCount();
                       JOptionPane jop1 = new JOptionPane();
-                      jop1.showMessageDialog(null,"Nombre d'Ouvrage:\t"+pou, "Information",JOptionPane.INFORMATION_MESSAGE);
+                      JOptionPane.showMessageDialog(null,"Nombre d'Ouvrage:\t"+pou, "Information",JOptionPane.INFORMATION_MESSAGE);
                       jop1.setVisible(true);
                      
          
@@ -1867,7 +1780,7 @@ import javax.swing.table.TableRowSorter;
             public void actionPerformed(ActionEvent e){
                  
                 JOptionPane ti = new JOptionPane();
-                String hosp = ti.showInputDialog(null, "Veuillez Entrer l'indice de la ligne modife\n(les lignes commencent par 0) !", "Information !",JOptionPane.QUESTION_MESSAGE);
+                String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'indice de la ligne modife\n(les lignes commencent par 0) !", "Information !",JOptionPane.QUESTION_MESSAGE);
                  int p=0;
                 try {
                     
@@ -1890,17 +1803,7 @@ import javax.swing.table.TableRowSorter;
                  }
                
                                           try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                                        	  Connection c1 = Connexion.connecter();
             
             int gh=0;
             
@@ -1919,13 +1822,13 @@ import javax.swing.table.TableRowSorter;
             b.updateRow();
         
               JOptionPane jop1 = new JOptionPane();
-              jop1.showMessageDialog(null,"Modification", "Information",JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null,"Modification", "Information",JOptionPane.INFORMATION_MESSAGE);
                      
          
      
       }catch(Exception er){
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
                      
       } 
                 
@@ -1956,7 +1859,7 @@ import javax.swing.table.TableRowSorter;
                 String da ="";
             
                  JOptionPane ti = new JOptionPane();
-                 String hosp = ti.showInputDialog(null, "Veuillez Entrer l'identifiant de l'ouvrage!", "Information !",JOptionPane.QUESTION_MESSAGE);
+                 String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'identifiant de l'ouvrage!", "Information !",JOptionPane.QUESTION_MESSAGE);
                  int fp=0;
                
                      try{
@@ -1971,7 +1874,7 @@ import javax.swing.table.TableRowSorter;
             
             String user="root"; 
             
-            String pass="";
+            String pass="test";
             
             Connection c1 =DriverManager.getConnection(url, user, pass);
             
@@ -2004,12 +1907,12 @@ import javax.swing.table.TableRowSorter;
                      
                      if(id==0){
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Aucune information", "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Aucune information", "Information",JOptionPane.INFORMATION_MESSAGE);
                      
                      }
                      else{
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Identifiant:\t\t"+id+"\n"+"Titre:\t\t"+n+"\n"+"Auteur:\t\t"+p+"\n"+"Type:\t\t"+ag+"\n"+"Nombre_exemplaire:\t\t"+s+"\nDerniere_Date_d'enregistrement:\t\t"+c, "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Identifiant:\t\t"+id+"\n"+"Titre:\t\t"+n+"\n"+"Auteur:\t\t"+p+"\n"+"Type:\t\t"+ag+"\n"+"Nombre_exemplaire:\t\t"+s+"\nDerniere_Date_d'enregistrement:\t\t"+c, "Information",JOptionPane.INFORMATION_MESSAGE);
                      
                        id=0;
                      }
@@ -2121,7 +2024,7 @@ import javax.swing.table.TableRowSorter;
        
         this.setLocationRelativeTo(null);
        
-        this.setResizable(false);
+        this.setResizable(true);
        
         this.setVisible(true);
         
@@ -2244,17 +2147,7 @@ import javax.swing.table.TableRowSorter;
       CreateColonne();
        
                   try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                	  Connection c1 = Connexion.connecter();
             
             Statement a = c1.createStatement();
             
@@ -2321,7 +2214,7 @@ import javax.swing.table.TableRowSorter;
         }
                       int pou = table.getRowCount();
                       JOptionPane jop1 = new JOptionPane();
-                      jop1.showMessageDialog(null,"Nombre d'Ouvrage disponible:\t"+pou, "Information",JOptionPane.INFORMATION_MESSAGE);
+                      JOptionPane.showMessageDialog(null,"Nombre d'Ouvrage disponible:\t"+pou, "Information",JOptionPane.INFORMATION_MESSAGE);
                       jop1.setVisible(true);
                      
          
@@ -2354,7 +2247,7 @@ import javax.swing.table.TableRowSorter;
             public void actionPerformed(ActionEvent e){
                  
                 JOptionPane ti = new JOptionPane();
-                String hosp = ti.showInputDialog(null, "Veuillez Entrer l'indice de la ligne modife\n(les lignes commencent par 0) !", "Information !",JOptionPane.QUESTION_MESSAGE);
+                String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'indice de la ligne modife\n(les lignes commencent par 0) !", "Information !",JOptionPane.QUESTION_MESSAGE);
                  int p=0;
                 try {
                     
@@ -2377,17 +2270,7 @@ import javax.swing.table.TableRowSorter;
                  }
                
                                           try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                                        	  Connection c1 = Connexion.connecter();
             
             int gh=0;
             
@@ -2406,13 +2289,13 @@ import javax.swing.table.TableRowSorter;
             b.updateRow();
         
               JOptionPane jop1 = new JOptionPane();
-              jop1.showMessageDialog(null,"Modification", "Information",JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null,"Modification", "Information",JOptionPane.INFORMATION_MESSAGE);
                      
          
      
       }catch(Exception er){
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
                      
       } 
                 
@@ -2443,7 +2326,7 @@ import javax.swing.table.TableRowSorter;
                 String da ="";
             
                  JOptionPane ti = new JOptionPane();
-                 String hosp = ti.showInputDialog(null, "Veuillez Entrer l'identifiant de l'ouvrage!", "Information !",JOptionPane.QUESTION_MESSAGE);
+                 String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'identifiant de l'ouvrage!", "Information !",JOptionPane.QUESTION_MESSAGE);
                  int fp=0;
                
                      try{
@@ -2458,7 +2341,7 @@ import javax.swing.table.TableRowSorter;
             
             String user="root"; 
             
-            String pass="";
+            String pass="test";
             
             Connection c1 =DriverManager.getConnection(url, user, pass);
             
@@ -2491,12 +2374,12 @@ import javax.swing.table.TableRowSorter;
                      
                      if(id==0){
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Aucune information", "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Aucune information", "Information",JOptionPane.INFORMATION_MESSAGE);
                      
                      }
                      else{
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Identifiant:\t\t"+id+"\n"+"Titre:\t\t"+n+"\n"+"Auteur:\t\t"+p+"\n"+"Type:\t\t"+ag+"\n"+"exemplaire_disponible:\t\t"+s, "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Identifiant:\t\t"+id+"\n"+"Titre:\t\t"+n+"\n"+"Auteur:\t\t"+p+"\n"+"Type:\t\t"+ag+"\n"+"exemplaire_disponible:\t\t"+s, "Information",JOptionPane.INFORMATION_MESSAGE);
                      
                        id=0;
                      }
@@ -2608,7 +2491,7 @@ import javax.swing.table.TableRowSorter;
        
         this.setLocationRelativeTo(null);
        
-        this.setResizable(false);
+        this.setResizable(true);
        
         this.setVisible(true);
         
@@ -2724,17 +2607,7 @@ import javax.swing.table.TableRowSorter;
       CreateColonne();
        
                   try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                	  Connection c1 = Connexion.connecter();
             
             Statement a = c1.createStatement();
             
@@ -2810,7 +2683,7 @@ import javax.swing.table.TableRowSorter;
         }
                       int pou = table.getRowCount();
                       JOptionPane jop1 = new JOptionPane();
-                      jop1.showMessageDialog(null,"Nombre de prets:\t"+pou, "Information",JOptionPane.INFORMATION_MESSAGE);
+                      JOptionPane.showMessageDialog(null,"Nombre de prets:\t"+pou, "Information",JOptionPane.INFORMATION_MESSAGE);
                       jop1.setVisible(true);
                      
          
@@ -2843,7 +2716,7 @@ import javax.swing.table.TableRowSorter;
             public void actionPerformed(ActionEvent e){
                  
                 JOptionPane ti = new JOptionPane();
-                String hosp = ti.showInputDialog(null, "Veuillez Entrer l'indice de la ligne modife\n(les lignes commencent par 0) !", "Information !",JOptionPane.QUESTION_MESSAGE);
+                String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'indice de la ligne modife\n(les lignes commencent par 0) !", "Information !",JOptionPane.QUESTION_MESSAGE);
                  int p=0;
                 try {
                     
@@ -2866,17 +2739,7 @@ import javax.swing.table.TableRowSorter;
                  }
                
                                           try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                                        	  Connection c1 = Connexion.connecter();
             
             int gh=0;
             
@@ -2895,13 +2758,13 @@ import javax.swing.table.TableRowSorter;
             b.updateRow();
         
               JOptionPane jop1 = new JOptionPane();
-              jop1.showMessageDialog(null,"Modification", "Information",JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null,"Modification", "Information",JOptionPane.INFORMATION_MESSAGE);
                      
          
      
       }catch(Exception er){
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
                      
       } 
                 
@@ -2932,7 +2795,7 @@ import javax.swing.table.TableRowSorter;
                 String da ="";
             
                  JOptionPane ti = new JOptionPane();
-                 String hosp = ti.showInputDialog(null, "Veuillez Entrer l'identifiant de l'ouvrage!", "Information !",JOptionPane.QUESTION_MESSAGE);
+                 String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'identifiant de l'ouvrage!", "Information !",JOptionPane.QUESTION_MESSAGE);
                  int fp=0;
                
                      try{
@@ -2980,12 +2843,12 @@ import javax.swing.table.TableRowSorter;
                      
                      if(id==0){
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Aucune information", "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Aucune information", "Information",JOptionPane.INFORMATION_MESSAGE);
                      
                      }
                      else{
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Identifiant:\t\t"+id+"\n"+"Titre:\t\t"+n+"\n"+"Auteur:\t\t"+p+"\n"+"Type:\t\t"+ag+"\n"+"exemplaire_disponible:\t\t"+s, "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Identifiant:\t\t"+id+"\n"+"Titre:\t\t"+n+"\n"+"Auteur:\t\t"+p+"\n"+"Type:\t\t"+ag+"\n"+"exemplaire_disponible:\t\t"+s, "Information",JOptionPane.INFORMATION_MESSAGE);
                      
                        id=0;
                      }
@@ -3102,7 +2965,7 @@ import javax.swing.table.TableRowSorter;
        
         this.setLocationRelativeTo(null);
        
-        this.setResizable(false);
+        this.setResizable(true);
        
         this.setVisible(true);
         
@@ -3230,18 +3093,7 @@ import javax.swing.table.TableRowSorter;
       CreateColonne();
        
                   try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
-            
+                	  Connection c1 = Connexion.connecter();
             Statement a = c1.createStatement();
             
             ResultSet b = a.executeQuery("SELECT * FROM emprunteur");
@@ -3313,7 +3165,7 @@ import javax.swing.table.TableRowSorter;
         }
                       int pou = table.getRowCount();
                       JOptionPane jop1 = new JOptionPane();
-                      jop1.showMessageDialog(null,"Nombre d'Adherents:\t"+pou, "Information",JOptionPane.INFORMATION_MESSAGE);
+                      JOptionPane.showMessageDialog(null,"Nombre d'Adherents:\t"+pou, "Information",JOptionPane.INFORMATION_MESSAGE);
                       jop1.setVisible(true);
                      
           }
@@ -3322,7 +3174,7 @@ import javax.swing.table.TableRowSorter;
             public void actionPerformed(ActionEvent e){
                  
                 JOptionPane ti = new JOptionPane();
-                String hosp = ti.showInputDialog(null, "Veuillez Entrer l'indice de la ligne modife\n(les lignes commencent par 0) !", "Information !",JOptionPane.QUESTION_MESSAGE);
+                String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'indice de la ligne modife\n(les lignes commencent par 0) !", "Information !",JOptionPane.QUESTION_MESSAGE);
                  int p=0;
                 try {
                     
@@ -3346,18 +3198,7 @@ import javax.swing.table.TableRowSorter;
             
                  }
                                           try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
-            
+                                        	  Connection c1 = Connexion.connecter();          
             int gh=0;
             
             Statement a = c1.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -3377,13 +3218,13 @@ import javax.swing.table.TableRowSorter;
             b.updateRow();
         
               JOptionPane jop1 = new JOptionPane();
-              jop1.showMessageDialog(null,"Modification effectuee", "Information",JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null,"Modification effectuee", "Information",JOptionPane.INFORMATION_MESSAGE);
                      
          
      
       }catch(Exception er){
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
                      
       } 
                 
@@ -3436,7 +3277,7 @@ import javax.swing.table.TableRowSorter;
                 String da ="";
             
                  JOptionPane ti = new JOptionPane();
-                 String hosp = ti.showInputDialog(null, "Veuillez Entrer l'identifiant de l'adherent!", "Information !",JOptionPane.QUESTION_MESSAGE);
+                 String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'identifiant de l'adherent!", "Information !",JOptionPane.QUESTION_MESSAGE);
                  int fp=0;
                  try {
                      fp=Integer.parseInt(hosp);
@@ -3445,18 +3286,7 @@ import javax.swing.table.TableRowSorter;
                 }
                
                      try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
-            
+                    	 Connection c1 = Connexion.connecter();
             Statement a = c1.createStatement();
             
             ResultSet b = a.executeQuery("SELECT * FROM emprunteur WHERE Identifiant='"+fp+"'");
@@ -3485,12 +3315,12 @@ import javax.swing.table.TableRowSorter;
             
                      if(id==0){
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Aucune information", "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Aucune information", "Information",JOptionPane.INFORMATION_MESSAGE);
                      
                      }
                      else{
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Identifiant:\t\t"+id+"\n"+"Nom:\t\t"+n+"\n"+"Prenom:\t\t"+p+"\n"+"Age:\t\t"+ag+"\n"+"Categorie:\t\t"+c+"\nAdresse:\t\t"+ad+"\nDate:"+da, "Information ",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Identifiant:\t\t"+id+"\n"+"Nom:\t\t"+n+"\n"+"Prenom:\t\t"+p+"\n"+"Age:\t\t"+ag+"\n"+"Categorie:\t\t"+c+"\nAdresse:\t\t"+ad+"\nDate:"+da, "Information ",JOptionPane.INFORMATION_MESSAGE);
                      
                        id=0;
                      }
@@ -3621,7 +3451,7 @@ import javax.swing.table.TableRowSorter;
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(null);
         setPreferredSize(new java.awt.Dimension(634, 640));
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
         setTitle("BiblioCare");
     
@@ -3771,7 +3601,7 @@ import javax.swing.table.TableRowSorter;
  
                
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Veuillez rensigner les champs vides", "Erreur",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Veuillez rensigner les champs vides", "Erreur",JOptionPane.ERROR_MESSAGE);
                     jop1.setVisible(true);
            }
            else{
@@ -3781,19 +3611,7 @@ import javax.swing.table.TableRowSorter;
      
                     try{
                         
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
-            
+                    	Connection c1 = Connexion.connecter();
             Statement a = c1.createStatement();
            
             a.executeUpdate("INSERT INTO emprunteur(Nom, Prenom, Age, Sexe, Adresse, Date_inscription, Categorie) VALUES('"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"', '"+s6+"', '"+s7+"')");
@@ -3804,7 +3622,7 @@ import javax.swing.table.TableRowSorter;
            }
                    
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Ajout bien effectue", "Information",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Ajout bien effectue", "Information",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);
                     
                     jTextField1.setText("");
@@ -3828,7 +3646,7 @@ import javax.swing.table.TableRowSorter;
   
 }
     public class ouvadd extends JFrame {
-    private javax.swing.JButton jButton1;
+      private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -3889,7 +3707,7 @@ import javax.swing.table.TableRowSorter;
         getContentPane().setLayout(null);
         setPreferredSize(new java.awt.Dimension(568, 580));
         setVisible(true);
-        setResizable(false);
+        setResizable(true);
         setTitle("BiblioCare");
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
@@ -4000,7 +3818,7 @@ import javax.swing.table.TableRowSorter;
  
                
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Veuillez rensigner les champs vides", "Erreur",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Veuillez rensigner les champs vides", "Erreur",JOptionPane.ERROR_MESSAGE);
                     jop1.setVisible(true);
            }
            else{
@@ -4022,18 +3840,7 @@ import javax.swing.table.TableRowSorter;
      
                     try{
                         
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque?useUnicode=true&characterEncoding=UTF-8";
-            
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                    	Connection c1 = Connexion.connecter();
          
             PreparedStatement a = c1.prepareStatement("INSERT INTO ouvrage VALUES(?, ?, ?, ?, ?, ?)");
             
@@ -4055,23 +3862,12 @@ import javax.swing.table.TableRowSorter;
            
            }catch(Exception ex){
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, ex.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);
                     
            }
                     try{
-                            Class.forName("com.mysql.jdbc.Driver");
-
-                            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-
-                            String user="root"; 
-
-                            String pass="";
-
-                            Connection c1 =DriverManager.getConnection(url, user, pass);
-
-                            System.out.println("Connection bien etablie");
-
+                    	Connection c1 = Connexion.connecter();
                             int gh=0;
 
                             Statement a = c1.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
@@ -4088,18 +3884,7 @@ import javax.swing.table.TableRowSorter;
 
                     try{
                         
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque?useUnicode=true&characterEncoding=UTF-8";
-            
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                    	Connection c1 = Connexion.connecter();
          
             PreparedStatement a = c1.prepareStatement("INSERT INTO dispo VALUES(?, ?, ?, ?, ?, ?)");
             
@@ -4118,14 +3903,14 @@ import javax.swing.table.TableRowSorter;
             a.executeUpdate();
             
              JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Ajout bien effectue", "Information",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Ajout bien effectue", "Information",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);
                     
                 
            
            }catch(Exception ex){
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, ex.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);
                     
            }
@@ -4212,7 +3997,7 @@ import javax.swing.table.TableRowSorter;
         jPanel1.setBackground(new java.awt.Color(0, 102, 153));
         jPanel1.setLayout(null);
         setPreferredSize(new java.awt.Dimension(614, 640));
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
         setTitle("BiblioCare");
 
@@ -4317,7 +4102,7 @@ import javax.swing.table.TableRowSorter;
  
                
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Veuillez rensigner les champs vides", "Erreur",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Veuillez rensigner les champs vides", "Erreur",JOptionPane.ERROR_MESSAGE);
                     jop1.setVisible(true);
            }
            else{
@@ -4335,18 +4120,7 @@ import javax.swing.table.TableRowSorter;
   
              try{
                         
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque?useUnicode=true&characterEncoding=UTF-8";
-            
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+            	 Connection c1 = Connexion.connecter();
          
             PreparedStatement a = c1.prepareStatement("INSERT INTO reservation VALUES(?, ?, ?, ?, ?, ?, ?)");
             
@@ -4367,14 +4141,14 @@ import javax.swing.table.TableRowSorter;
             a.executeUpdate();
             
              JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Ajout bien effectue", "Information",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Ajout bien effectue", "Information",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);
                     
                 
            
            }catch(Exception ex){
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, ex.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);
                     
            }
@@ -4453,8 +4227,8 @@ import javax.swing.table.TableRowSorter;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(null);
-           setPreferredSize(new java.awt.Dimension(640, 640));
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(640, 640));
+        setResizable(true);
         setVisible(true);
         setTitle("BiblioCare");
     
@@ -4567,7 +4341,7 @@ import javax.swing.table.TableRowSorter;
  
                
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Veuillez rensigner les champs vides", "Erreur",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Veuillez rensigner les champs vides", "Erreur",JOptionPane.ERROR_MESSAGE);
                     jop1.setVisible(true);
            }
            else{
@@ -4590,18 +4364,7 @@ import javax.swing.table.TableRowSorter;
           
                     try{
                         
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque?useUnicode=true&characterEncoding=UTF-8";
-            
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                    	Connection c1 = Connexion.connecter();
          
             PreparedStatement a = c1.prepareStatement("INSERT INTO pret VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
@@ -4626,29 +4389,19 @@ import javax.swing.table.TableRowSorter;
             a.executeUpdate();
             
              JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, "Ajout bien effectue", "Information",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Ajout bien effectue", "Information",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);
                     
                 
            
            }catch(Exception ex){
                     JOptionPane jop1 = new JOptionPane();
-                    jop1.showMessageDialog(null, ex.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
                     jop1.setVisible(true);
                     
            }
                              try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                            	 Connection c1 = Connexion.connecter();
             
             Statement a = c1.createStatement();
             
@@ -4667,17 +4420,7 @@ import javax.swing.table.TableRowSorter;
                   
           
           try{
-                      Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+        	  Connection c1 = Connexion.connecter();
             
             Statement a = c1.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
             
@@ -4786,7 +4529,7 @@ import javax.swing.table.TableRowSorter;
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(null);
         setPreferredSize(new java.awt.Dimension(478, 495));
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setLayout(null);
@@ -5023,7 +4766,7 @@ import javax.swing.table.TableRowSorter;
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(null);
         setPreferredSize(new java.awt.Dimension(503, 515));
-        setResizable(false);
+        setResizable(true);
         setVisible(false);
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -5295,7 +5038,7 @@ import javax.swing.table.TableRowSorter;
        
         this.setLocationRelativeTo(null);
        
-        this.setResizable(false);
+        this.setResizable(true);
        
         this.setVisible(true);
         
@@ -5416,17 +5159,7 @@ import javax.swing.table.TableRowSorter;
       CreateColonne();
        
                   try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                	  Connection c1 = Connexion.connecter();
             
             Statement a = c1.createStatement();
             
@@ -5501,7 +5234,7 @@ import javax.swing.table.TableRowSorter;
         }
                       int pou = table.getRowCount();
                       JOptionPane jop1 = new JOptionPane();
-                      jop1.showMessageDialog(null,"Nombre de reservation:\t"+pou, "Information",JOptionPane.INFORMATION_MESSAGE);
+                      JOptionPane.showMessageDialog(null,"Nombre de reservation:\t"+pou, "Information",JOptionPane.INFORMATION_MESSAGE);
                       jop1.setVisible(true);
                      
          
@@ -5534,7 +5267,7 @@ import javax.swing.table.TableRowSorter;
             public void actionPerformed(ActionEvent e){
                  
                 JOptionPane ti = new JOptionPane();
-                String hosp = ti.showInputDialog(null, "Veuillez Entrer l'indice de la ligne modife\n(les lignes commencent par 0) !", "Information !",JOptionPane.QUESTION_MESSAGE);
+                String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'indice de la ligne modife\n(les lignes commencent par 0) !", "Information !",JOptionPane.QUESTION_MESSAGE);
                  int p=0;
                 try {
                     
@@ -5557,17 +5290,7 @@ import javax.swing.table.TableRowSorter;
                  }
                
                                           try{
-            Class.forName("com.mysql.jdbc.Driver");
-              
-            String url= "jdbc:mysql://localhost:3306/bibliotheque";
-            
-            String user="root"; 
-            
-            String pass="";
-            
-            Connection c1 =DriverManager.getConnection(url, user, pass);
-            
-            System.out.println("Connection bien etablie");
+                                        	  Connection c1 = Connexion.connecter();
             
             int gh=0;
             
@@ -5586,13 +5309,13 @@ import javax.swing.table.TableRowSorter;
             b.updateRow();
         
               JOptionPane jop1 = new JOptionPane();
-              jop1.showMessageDialog(null,"Modification", "Information",JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null,"Modification", "Information",JOptionPane.INFORMATION_MESSAGE);
                      
          
      
       }catch(Exception er){
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,er.toString(), "Information",JOptionPane.INFORMATION_MESSAGE);
                      
       } 
                 
@@ -5621,7 +5344,7 @@ import javax.swing.table.TableRowSorter;
                String h7="";
             
                  JOptionPane ti = new JOptionPane();
-                 String hosp = ti.showInputDialog(null, "Veuillez Entrer l'identifiant de la reservation!", "Information !",JOptionPane.QUESTION_MESSAGE);
+                 String hosp = JOptionPane.showInputDialog(null, "Veuillez Entrer l'identifiant de la reservation!", "Information !",JOptionPane.QUESTION_MESSAGE);
                  int fp=0;
                
                      try{
@@ -5636,7 +5359,7 @@ import javax.swing.table.TableRowSorter;
             
             String user="root"; 
             
-            String pass="";
+            String pass="test";
             
             Connection c1 =DriverManager.getConnection(url, user, pass);
             
@@ -5667,12 +5390,12 @@ import javax.swing.table.TableRowSorter;
                      
                      if(h1==0){
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Aucune information", "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Aucune information", "Information",JOptionPane.INFORMATION_MESSAGE);
                      
                      }
                      else{
                        JOptionPane jop1 = new JOptionPane();
-                       jop1.showMessageDialog(null,"Identifiant:\t\t"+h1+"\n"+"Identifiant Ouvrage:\t\t"+h2+"\n"+"Titre:\t\t"+h3+"\n"+"Identifiant Adherent:\t\t"+h4+"\n"+"Nom:\t\t"+h5+"\nPrenom"+h6+"\nDate"+h7, "Information",JOptionPane.INFORMATION_MESSAGE);
+                       JOptionPane.showMessageDialog(null,"Identifiant:\t\t"+h1+"\n"+"Identifiant Ouvrage:\t\t"+h2+"\n"+"Titre:\t\t"+h3+"\n"+"Identifiant Adherent:\t\t"+h4+"\n"+"Nom:\t\t"+h5+"\nPrenom"+h6+"\nDate"+h7, "Information",JOptionPane.INFORMATION_MESSAGE);
                      
                        h1=0;
                      }
@@ -5747,11 +5470,7 @@ import javax.swing.table.TableRowSorter;
         
     }
   
-    
-    
-          
-
-      
+   
 }
 
 }
